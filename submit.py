@@ -19,12 +19,15 @@ def wait_until_status(job_id, status_to_wait_for, timeout_seconds=30):
     while time.time() - start <= timeout_seconds:
         status = client.get_job_status(job_id)
         print(f"status: {status}")
-        logs = client.get_job_logs(job_id)
-        print(logs)
+
         if status in status_to_wait_for:
             break
         time.sleep(1)
 
+    logs = client.get_job_logs(job_id)
+    print(logs)
+
 
 wait_until_status(job_id, {JobStatus.SUCCEEDED, JobStatus.STOPPED, JobStatus.FAILED})
 
+client.stop_job(job_id)
