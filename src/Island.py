@@ -3,7 +3,7 @@ import asyncio
 import ray
 
 from Computation import Computation
-from selectAlgorithm import SelectAlgorithm
+from src.selectAlgorithm import SelectAlgorithm
 
 
 @ray.remote

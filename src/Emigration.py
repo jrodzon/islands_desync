@@ -1,6 +1,6 @@
 import ray
 
-from selectAlgorithm import SelectAlgorithm
+from src.selectAlgorithm import SelectAlgorithm
 
 
 @ray.remote

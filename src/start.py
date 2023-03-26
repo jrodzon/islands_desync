@@ -1,11 +1,8 @@
 import asyncio
 import sys
-import time
-
-import ray
 
 from Island import Island
-from selectAlgorithm import RandomSelect
+from src.selectAlgorithm import RandomSelect
 
 
 async def main():

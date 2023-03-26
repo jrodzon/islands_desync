@@ -1,6 +1,6 @@
 import random
 
-from selectAlgorithm.SelectAlgorithm import SelectAlgorithm
+from src.selectAlgorithm.SelectAlgorithm import SelectAlgorithm
 
 
 class RandomSelect(SelectAlgorithm):
