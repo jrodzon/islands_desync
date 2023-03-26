@@ -8,6 +8,8 @@ class RingTopology(Topology):
         super().__init__(size)
 
     def create(self) -> Dict[int, List]:
+        if self.size == 1:
+            return {0: []}
         if self.size == 2:
             return {
                 0: [1],
