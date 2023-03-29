@@ -3,6 +3,7 @@ import asyncio
 import ray
 
 from Computation import Computation
+from Immigrant import Immigrant
 from src.selectAlgorithm import SelectAlgorithm
 
 
@@ -25,7 +26,8 @@ class Island:
         while True:
             await asyncio.sleep(0)
 
-    async def receive_immigrant(self, immigrant):
+    async def receive_immigrant(self, immigrant: Immigrant):
+        print('Wyspa %s: dostaje imigranta: %s' % (self.island_id, immigrant))
         self.immigrants.append(immigrant)
 
     async def get_immigrants(self):
