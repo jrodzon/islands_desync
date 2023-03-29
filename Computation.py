@@ -1,5 +1,4 @@
 import random
-import time
 from time import sleep
 
 import ray
