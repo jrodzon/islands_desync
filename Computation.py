@@ -21,7 +21,7 @@ class Computation:
             self.iteration()
 
     def iteration(self):
-        immigrants: Immigrant = ray.get(self.island.get_immigrants.remote())
+        immigrants: [Immigrant] = ray.get(self.island.get_immigrants.remote())
 
         if len(immigrants) > 0:
             print('Wyspa %s: dostaje %s' % (self.n, immigrants))
