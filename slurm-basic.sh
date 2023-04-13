@@ -6,11 +6,12 @@
 
 
 #SBATCH --mem-per-cpu=4GB
+#SBATCH -p plgrid
 
 git clone https://github.com/youngdashu/islands_desync.git
 
-
-source $SCRATCH/rayenv/bin/activate
+module load python/3.10.4-gcccore-11.3.0
+source ~/rayenv/bin/activate
 
 
 # Getting the node names
