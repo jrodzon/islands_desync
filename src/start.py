@@ -2,7 +2,7 @@ import asyncio
 import sys
 
 from Island import Island
-from src.selectAlgorithm import RandomSelect
+from selectAlgorithm import RandomSelect
 
 
 async def main():
