@@ -1,12 +1,17 @@
 import asyncio
 import sys
 
+import ray
+
 from Island import Island
 from selectAlgorithm import RandomSelect
 
 
 async def main():
     island_count = int(sys.argv[1])
+
+    if len(sys.argv) > 2:
+        ray.init(temp_dir="/io/" + sys.argv[2])
 
     islands = [
         Island
