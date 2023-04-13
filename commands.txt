@@ -1,4 +1,4 @@
-ray start --head
+ray start --head --port=6380
 
 ray start
 

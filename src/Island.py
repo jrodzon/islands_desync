@@ -4,7 +4,7 @@ import ray
 
 from Computation import Computation
 from Immigrant import Immigrant
-from src.selectAlgorithm import SelectAlgorithm
+from selectAlgorithm import SelectAlgorithm
 
 
 @ray.remote
