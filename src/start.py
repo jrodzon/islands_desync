@@ -11,7 +11,7 @@ async def main():
     island_count = int(sys.argv[1])
 
     if len(sys.argv) > 2:
-        ray.init(temp_dir="/io/" + sys.argv[2])
+        ray.init(_temp_dir=sys.argv[2])
 
     islands = [
         Island
