@@ -1,4 +1,7 @@
 import sys
+from math import trunc
+
+import pika as pika
 
 from algorithm.genetic_island_algorithm import GeneticIslandAlgorithm
 from jmetal.problem.singleobjective.unconstrained import Rastrigin
@@ -9,6 +12,8 @@ from jmetal.operator.selection import RouletteWheelSelection
 from jmetal.util.termination_criterion import StoppingByEvaluations
 import json
 from generator.island_solution_generator import IslandSolutionGenerator
+from src.geneticAlgorithm.migrations.queue_migration import QueueMigration
+from src.geneticAlgorithm.utils.create_rabbitmq_channels import CreateRabbitmqChannels
 
 from utils import myDefProblems
 from utils import datetimer
@@ -47,6 +52,23 @@ def run():
     #problem = Sphere(NUMBER_OF_VARIABLES)
     #
     problem = Rastrigin(NUMBER_OF_VARIABLES)
+
+    rabbitmq_delays = configuration["island_delays"]
+
+    channel = CreateRabbitmqChannels(
+        configuration["number_of_islands"],
+        island,
+        data_interval=round(NUMBER_OF_EVALUATIONS // configuration["how_many_data_intervals"] ),
+        last_step=trunc(
+            (NUMBER_OF_EVALUATIONS - POPULATION_SIZE) / OFFSPRING_POPULATION_SIZE),
+        max_evaluations=NUMBER_OF_EVALUATIONS,
+        rabbitmq_delays=rabbitmq_delays,
+        population_size=POPULATION_SIZE,
+        offspring_population_size=OFFSPRING_POPULATION_SIZE,
+        wyspWRun=int(sys.argv[4])
+    ).create_channels()
+    migration = QueueMigration(island, channel=channel, number_of_islands=configuration["number_of_islands"],
+                               rabbitmq_delays=rabbitmq_delays)
 
     if island==0:
         print ("W run_algorithm "+str(sys.argv[1])+"/"+str(sys.argv[4])+" WYSPA,  seria: "+ str(sys.argv[5])+",  interwał: "+str(sys.argv[7])+", liczba migrantów: "+str(sys.argv[6])+" - "+str(sys.argv[2])+" "+str(sys.argv[3]))
@@ -92,7 +114,6 @@ def run():
         number_of_islands=configuration["number_of_islands"],
         number_of_emigrants= int(sys.argv[6]),   #configuration["number_of_migrants"],
         island=island,
-        rabbitmq_delays=configuration["island_delays"],
 
         want_create_boxplot=configuration["want_create_boxplot"],
         want_create_plot=configuration["want_create_plot"],

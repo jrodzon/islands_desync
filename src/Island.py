@@ -5,6 +5,7 @@ import ray
 from Computation import Computation
 from Immigrant import Immigrant
 from selectAlgorithm import SelectAlgorithm
+from src.geneticAlgorithm.run_hpc.run_algorithm_params import RunAlgorithmParams
 
 
 @ray.remote
@@ -17,9 +18,10 @@ class Island:
         self.select_algorithm: SelectAlgorithm = select_algorithm
         print(self)
 
-    async def start(self, island_handle, islands: ['Island']):
+    async def start(self, island_handle, islands: ['Island'], algorithm_params: RunAlgorithmParams):
         self.islands = islands
-        self.computation = Computation.remote(island_handle, self.island_id, islands, self.select_algorithm)
+        self.computation = Computation.remote(island_handle, self.island_id, islands, self.select_algorithm,
+                                              algorithm_params)
         self.computation.start.remote()
 
         # zacznij oddawac procesor dla sqoich innych metod
