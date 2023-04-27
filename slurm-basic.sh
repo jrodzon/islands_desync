@@ -10,12 +10,12 @@
 
 #SBATCH -A plgsano4-cpu
 
-git clone https://github.com/youngdashu/islands_desync.git
+#git clone https://github.com/youngdashu/islands_desync.git
 
 module load python/3.10.4-gcccore-11.3.0
 source ~/rayenv/bin/activate
 
-mkdir io/"$SLURM_JOB_ID"
+mkdir ~/io/"$SLURM_JOB_ID"
 
 tmpdir="$HOME/io/$SLURM_JOB_ID"
 
@@ -37,7 +37,7 @@ srun --nodes=1 --ntasks=1 -w "$head_node" \
     ray start --head --node-ip-address="$head_node_ip" --port=$port --temp-dir="$tmpdir" --block &
 
 # optional, though may be useful in certain versions of Ray < 1.0.
-sleep 5
+#sleep 5
 
 # number of nodes other than the head node
 worker_num=$((SLURM_JOB_NUM_NODES - 1))
@@ -47,7 +47,7 @@ for ((i = 1; i <= worker_num; i++)); do
     echo "Starting WORKER $i at $node_i"
     srun --nodes=1 --ntasks=1 -w "$node_i" \
         ray start --address "$ip_head" --temp-dir="$tmpdir" --block &
-    sleep 5
+    sleep 1
 done
 
 number_of_migrants=5
@@ -55,4 +55,4 @@ migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 
-python3 -u islands_desync/islands_desync/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u islands_desync/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta
