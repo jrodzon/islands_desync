@@ -19,6 +19,8 @@ mkdir ~/io/"$SLURM_JOB_ID"
 
 tmpdir="$HOME/io/$SLURM_JOB_ID"
 
+export PYTHONPATH="${PYTHONPATH}:$PWD"
+
 
 # Getting the node names
 nodes=$(scontrol show hostnames "$SLURM_JOB_NODELIST")
