@@ -34,7 +34,7 @@ echo "IP Head: $ip_head"
 
 echo "Starting HEAD at $head_node"
 srun --nodes=1 --ntasks=1 -w "$head_node" \
-    ray start --head --node-ip-address="$head_node_ip" --port=$port --temp_dir="$tmpdir" --block &
+    ray start --head --node-ip-address="$head_node_ip" --port=$port --temp-dir="$tmpdir" --block &
 
 # optional, though may be useful in certain versions of Ray < 1.0.
 sleep 5
@@ -46,7 +46,7 @@ for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
     srun --nodes=1 --ntasks=1 -w "$node_i" \
-        ray start --address "$ip_head" --temp_dir="$tmpdir" --block &
+        ray start --address "$ip_head" --temp-dir="$tmpdir" --block &
     sleep 5
 done
 
@@ -55,4 +55,4 @@ migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 
-python3 -u islands_desync/src/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u islands_desync/islands_desync/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta
