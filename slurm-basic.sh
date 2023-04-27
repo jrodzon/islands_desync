@@ -8,6 +8,8 @@
 #SBATCH --mem-per-cpu=4GB
 #SBATCH -p plgrid
 
+#SBATCH -A plgsano4-cpu
+
 git clone https://github.com/youngdashu/islands_desync.git
 
 module load python/3.10.4-gcccore-11.3.0
@@ -48,4 +50,9 @@ for ((i = 1; i <= worker_num; i++)); do
     sleep 5
 done
 
-python3 -u islands_desync/src/start.py 10 $tmpdir
+number_of_migrants=5
+migration_interval=5
+dda=$(date +%y%m%d)
+tta=$(date +g%H%M%S)
+
+python3 -u islands_desync/src/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta

@@ -1,6 +1,6 @@
 import unittest
 
-from src.topologies.CompleteTopology import CompleteTopology
+from islands_desync.topologies.CompleteTopology import CompleteTopology
 
 
 class MyTestCase(unittest.TestCase):
@@ -12,17 +12,12 @@ class MyTestCase(unittest.TestCase):
                 2: [0, 1, 3],
                 3: [0, 1, 2],
             },
-            CompleteTopology(4).create()
+            CompleteTopology(4).create(),
         )
 
     def test_small_case(self):
-        self.assertEqual(
-            {
-                0: []
-            },
-            CompleteTopology(1).create()
-        )
+        self.assertEqual({0: []}, CompleteTopology(1).create())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
