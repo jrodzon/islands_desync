@@ -8,7 +8,7 @@
 #SBATCH --mem-per-cpu=4GB
 #SBATCH -p plgrid
 
-#SBATCH -A plgsano3-cpu
+#SBATCH -A plgsano4-cpu
 
 git clone https://github.com/youngdashu/islands_desync.git
 
