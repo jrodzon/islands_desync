@@ -8,6 +8,8 @@
 #SBATCH --mem-per-cpu=4GB
 #SBATCH -p plgrid
 
+#SBATCH -A plgsano3-cpu
+
 git clone https://github.com/youngdashu/islands_desync.git
 
 module load python/3.10.4-gcccore-11.3.0
