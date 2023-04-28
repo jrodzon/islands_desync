@@ -42,5 +42,8 @@ class Island:
     async def get_immigrants(self):
         return [self.immigrants.pop(0) for _ in self.immigrants]
 
+    async def finish(self):
+        ray.actor.exit_actor()
+
     def __repr__(self):
         return "Island %s" % self.island_id

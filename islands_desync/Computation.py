@@ -40,6 +40,12 @@ class Computation:
         self.algorithm.run()
         result = self.algorithm.get_result()
         print(f"\nIsland: {self.n} Fitness: {result.objectives[0]}")
+
+        #TODO
+        # zakończ wyspę
+        self.island.finish.remote()
+
+
         # while True:
         #     self.iteration()
 
