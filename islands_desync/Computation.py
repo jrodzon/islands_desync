@@ -27,10 +27,6 @@ class Computation:
         self.island = island
         self.n: int = n
 
-        # self.population: List[Immigrant] = [Immigrant(0, n, 'Obj 1 z wyspy %s' % n),
-        #                                     Immigrant(0, n, 'Obj 2 z wyspy %s' % n),
-        #                                     Immigrant(0, n, 'Obj 3 z wyspy %s' % n)]
-        # self.iteration_count = 0
         self.emigration = Emigration.remote(islands, select_algorithm)
         self.algorithm = create_algorithm_hpc(
             n, island, self.emigration, algorithm_params
@@ -41,13 +37,15 @@ class Computation:
         result = self.algorithm.get_result()
         print(f"\nIsland: {self.n} Fitness: {result.objectives[0]}")
 
-        #TODO
-        # zakończ wyspę
-        self.island.finish.remote()
+        self.finish()
 
 
         # while True:
         #     self.iteration()
+    def finish(self):
+        ray.kill(self.emigration)
+        self.island.finish.remote()
+        ray.actor.exit_actor()
 
     # def iteration(self):
     #

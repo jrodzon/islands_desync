@@ -16,7 +16,7 @@ class QueueMigration(Migration):
         self.rabbitmq_delays = rabbitmq_delays
         self.number_of_islands = number_of_islands
 
-    def migrate_individuals(self, individuals_to_migrate):
+    def migrate_individuals(self, individuals_to_migrate, iteration_number):
         for i in individuals_to_migrate:
             destination = random.choice(
                 [

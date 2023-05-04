@@ -35,9 +35,10 @@ class Island:
         while True:
             await asyncio.sleep(0)
 
-    async def receive_immigrant(self, immigrant):
-        print("Wyspa %s: dostaje imigranta: %s" % (self.island_id, str(immigrant)[:10]))
-        self.immigrants.append(immigrant)
+    async def receive_immigrant(self, immigrant_iteration):
+        print("Wyspa %s: dostaje imigranta: %s" % (self.island_id, str(immigrant_iteration)[:10]))
+        # immigrant, iteration_number = immigrant_iteration
+        self.immigrants.append(immigrant_iteration)
 
     async def get_immigrants(self):
         return [self.immigrants.pop(0) for _ in self.immigrants]

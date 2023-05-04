@@ -277,17 +277,18 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
                 )
                 return
 
-            self.migration.migrate_individuals(individuals_to_migrate)
+            self.migration.migrate_individuals(individuals_to_migrate, self.step_num, self.island)
 
     def add_new_individuals(self):
         new_individuals, emigration_at_step_num = self.migration.receive_individuals(
+            self.step_num,
             self.evaluations
         )
 
         if len(new_individuals) > 0:
             self.nowi = True
             self.tab_emigr[self.step_num] = emigration_at_step_num
-            self.solutions.extend(new_individuals)
+            self.solutions.extend(list(new_individuals))
 
     def wytnij(self, lancuchZnakow):
         return lancuchZnakow.replace("\n", "")
@@ -644,6 +645,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.migrate_individuals()
             # todo: SPR CZY MIGRANT POPRAWIŁ WYNIK WYSPY - best w population[0] > best
             try:
+                print('Island %s iter: %s get popu' % (self.island, self.step_num))
                 self.add_new_individuals()
             except:
                 pass
