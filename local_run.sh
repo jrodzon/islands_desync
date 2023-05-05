@@ -8,4 +8,4 @@ tmpdir=" "
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 
-python3 -u ./islands_desync/start.py 4 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u ./islands_desync/start.py 6 $tmpdir $number_of_migrants $migration_interval $dda $tta

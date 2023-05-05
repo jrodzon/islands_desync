@@ -19,6 +19,8 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
 from islands_desync.geneticAlgorithm.utils import datetimer, myDefCrossover
 from islands_desync.geneticAlgorithm.utils.myDefMutation import MyUniformMutation
 
+from datetime import datetime, timedelta
+
 
 def create_algorithm_hpc(
     n, island, emigration, params: RunAlgorithmParams
@@ -52,6 +54,8 @@ def create_algorithm_hpc(
     #     print("W pliku json: "+str(configuration["number_of_islands"]))
 
     migration = RayMigration(island, emigration)
+
+    wait_date: datetime = datetime.now() + timedelta(seconds=30)
 
     genetic_island_algorithm = GeneticIslandAlgorithm(
         problem=problem,
@@ -108,6 +112,7 @@ def create_algorithm_hpc(
             max_evaluations=NUMBER_OF_EVALUATIONS
         ),
         population_generator=IslandSolutionGenerator(island_number=n),
+        wait_date=wait_date
     )
 
     return genetic_island_algorithm

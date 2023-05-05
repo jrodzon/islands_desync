@@ -3,6 +3,7 @@ import os
 import random
 import statistics
 import time
+from datetime import datetime
 from math import trunc
 from typing import List, TypeVar
 
@@ -32,6 +33,8 @@ from ..utils import (
     tsne,
 )
 
+from jmetal.logger import get_logger
+
 # import winsound
 
 
@@ -44,37 +47,38 @@ R = TypeVar("R")
 
 class GeneticIslandAlgorithm(GeneticAlgorithm):
     def __init__(
-        self,
-        problem: Problem,
-        population_size: int,
-        offspring_population_size: int,
-        mutation: Mutation,
-        crossover: Crossover,
-        selection: Selection,
-        migration_interval: int,
-        number_of_islands: int,
-        number_of_emigrants: int,
-        island: int,
-        want_create_boxplot: bool,
-        want_create_plot: bool,
-        want_save_migrants_in_txt: bool,
-        want_save_diversity_when_improvement: bool,
-        want_tsne_to2: bool,
-        want_tsne_to3: bool,
-        want_diversity_to_console: bool,
-        want_run_end_communications: bool,
-        type_of_connection: str,
-        migrant_selection_type: str,
-        how_many_data_intervals: int,
-        plot_population_interval: int,
-        par_date: str,
-        par_time: str,
-        wyspWRun: int,
-        seria: int,
-        migration: Migration,
-        termination_criterion: TerminationCriterion = store.default_termination_criteria,
-        population_generator: Generator = store.default_generator,
-        population_evaluator: Evaluator = store.default_evaluator,
+            self,
+            problem: Problem,
+            population_size: int,
+            offspring_population_size: int,
+            mutation: Mutation,
+            crossover: Crossover,
+            selection: Selection,
+            migration_interval: int,
+            number_of_islands: int,
+            number_of_emigrants: int,
+            island: int,
+            want_create_boxplot: bool,
+            want_create_plot: bool,
+            want_save_migrants_in_txt: bool,
+            want_save_diversity_when_improvement: bool,
+            want_tsne_to2: bool,
+            want_tsne_to3: bool,
+            want_diversity_to_console: bool,
+            want_run_end_communications: bool,
+            type_of_connection: str,
+            migrant_selection_type: str,
+            how_many_data_intervals: int,
+            plot_population_interval: int,
+            par_date: str,
+            par_time: str,
+            wyspWRun: int,
+            seria: int,
+            migration: Migration,
+            wait_date: datetime,
+            termination_criterion: TerminationCriterion = store.default_termination_criteria,
+            population_generator: Generator = store.default_generator,
+            population_evaluator: Evaluator = store.default_evaluator,
     ):
         super(GeneticIslandAlgorithm, self).__init__(
             problem,
@@ -134,7 +138,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         # SCIEZKA I NAZWA PLIKOW
         self.fileName = filename.Filename(self, self.want_run_end_communications)
         if (
-            self.problem.name()[0:4] == "Labs"
+                self.problem.name()[0:4] == "Labs"
         ):  # <----       todo: LABS i problemy gdzie szukamy max
             self.Fname = self.fileName.getname(
                 par_date + "_" + par_time,
@@ -224,6 +228,8 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         self.nowi = False
         self.bylLog = False
 
+        self.wait_date = wait_date
+
     def __str__(self):
         return "genetic_island_algorithm"
 
@@ -233,7 +239,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
 
     # MIGRATION SECTION  -----------------------------------------------------------
     def get_individuals_to_migrate(
-        self, population: List[S], number_of_emigrants: int
+            self, population: List[S], number_of_emigrants: int
     ) -> List[S]:
         if len(population) < number_of_emigrants:
             raise ValueError("Population is too small")
@@ -335,7 +341,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         jsn.saveJson(results)
 
     def uzupParamLog(
-        self,
+            self,
     ):  # dodaje info o krzyzowaniu, mutacji i selekcji z run_algorithm.py (tekst)
         douzup = ""
         wlaczone = False
@@ -363,7 +369,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
 
     # CSV SECTION  -----------------------------------------------------------
     def createCsvForThisStep(
-        self, poprawa
+            self, poprawa
     ):  # OBRAZ GENERACJI W TYM MOMENCIE ZRZUT I RYSUNEK
         osobniki = []
         for solut in range(len(self.solutions)):
@@ -429,7 +435,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         self.tab_jump_ind += 1
 
     def saveDetailedPopulationDescriptionForThisStepInTab(
-        self,
+            self,
     ):  # OBRAZ GENERACJI W TYM MOMENCIE ZRZUT I RYSUNEK
         osobniki = []
         for solut in range(len(self.solutions)):
@@ -531,7 +537,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
 
     def createSpaceDiversityPopulationPlots(self):
         if self.ctrl.isCtrlComplete(self.number_of_islands) and self.ctrl.isEndComplete(
-            self.number_of_islands
+                self.number_of_islands
         ):
             self.readyForCumulativePopulPlot = True
 
@@ -539,7 +545,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         results = []
         for i in range(self.number_of_islands):
             with open(
-                self.path + "/" + "kontrolW" + str(i) + "End.ctrl.txt", "r"
+                    self.path + "/" + "kontrolW" + str(i) + "End.ctrl.txt", "r"
             ) as file:
                 data = file.readlines()
                 for linia in data:
@@ -611,6 +617,9 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         self.step_num = self.step_num + 1
 
         if 1 == self.step_num:
+            # WAIT FOR OTHER ISLANDS
+            time.sleep((self.wait_date - datetime.now()).seconds)
+
             self.paramJson()
             self.lastBest = self.solutions[0].objectives[0]
             self.saveXiYiFittnessWhileJump()

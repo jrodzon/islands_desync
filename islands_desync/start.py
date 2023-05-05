@@ -13,9 +13,6 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
 
 
 async def main():
-
-
-
     if sys.argv[2] != " ":
         ray.init(_temp_dir=sys.argv[2])
 
@@ -30,21 +27,40 @@ async def main():
 
     islands = [Island.remote(i, RandomSelect()) for i in range(params.island_count)]
 
+    # refs = [
+    #     island.start.remote(
+    #         island,
+    #         list(
+    #             map(
+    #                 lambda other_island: other_island[1],
+    #                 filter(
+    #                     lambda other_island: other_island[0] != island_id,
+    #                     enumerate(islands),
+    #                 ),
+    #             )
+    #         ),
+    #         params,
+    #     )
+    #     for island_id, island in enumerate(islands)
+    # ]
+
+    all_neighbours = [list(
+        map(
+            lambda other_island: other_island[1],
+            filter(
+                lambda other_island: other_island[0] != island_id,
+                enumerate(islands),
+            ),
+        )
+    )
+        for island_id, island in enumerate(islands)
+    ]
+
     refs = [
         island.start.remote(
-            island,
-            list(
-                map(
-                    lambda other_island: other_island[1],
-                    filter(
-                        lambda other_island: other_island[0] != island_id,
-                        enumerate(islands),
-                    ),
-                )
-            ),
-            params,
+            island, neighbours, params
         )
-        for island_id, island in enumerate(islands)
+        for island, neighbours in zip(islands, all_neighbours)
     ]
 
     await asyncio.wait(refs)
