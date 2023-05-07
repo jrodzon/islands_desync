@@ -41,29 +41,3 @@ class Computation:
         ray.kill(self.emigration)
         ray.kill(self.island)
         ray.actor.exit_actor()
-
-    # def iteration(self):
-    #
-    #     self.iteration_count += 1
-    #
-    #     immigrants: [Immigrant] = ray.get(self.island.get_immigrants.remote())
-    #
-    #     if len(immigrants) > 0:
-    #         print('%s: dostaje %s' % (self.island_description(), immigrants))
-    #
-    #     self.population += immigrants
-    #
-    #     print('%s: wszyscy osobnicy: %s' % (self.island_description(), self.population))
-    #
-    #     sleep(2.0)  # computation
-    #
-    #     for member in self.population:
-    #         member.increment_iteration()
-    #
-    #     if len(self.population) > 0:
-    #         target_num = random.randint(0, len(self.population) - 1)
-    #         print('%s: Emigruje %s' % (self.island_description(), str(self.population[target_num])))
-    #         self.emigration.emigrate.remote(self.population.pop(target_num))
-    #
-    # def island_description(self):
-    #     return "Wyspa %s iter: %s" % (self.n, self.iteration_count)
