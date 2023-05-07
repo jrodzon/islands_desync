@@ -107,7 +107,7 @@ def create_algorithm_hpc(
             max_evaluations=NUMBER_OF_EVALUATIONS
         ),
         population_generator=IslandSolutionGenerator(island_number=n),
-        wait_date=wait_date
+        wait_date=wait_date,
     )
 
     return genetic_island_algorithm

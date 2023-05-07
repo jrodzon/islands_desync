@@ -13,7 +13,8 @@ class CompleteTopology(Topology):
 
     def connected_to_i(self, i):
         return list(
-            map(lambda island_num: self.create_object_method(island_num),
-                filter(lambda num: num != i, range(self.size))
-                )
+            map(
+                lambda island_num: self.create_object_method(island_num),
+                filter(lambda num: num != i, range(self.size)),
+            )
         )

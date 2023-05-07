@@ -13,6 +13,6 @@ class Migration(ABC):
 
     @abstractmethod
     def receive_individuals(
-            self, step_num: int, evaluations: int
+        self, step_num: int, evaluations: int
     ) -> (List, Dict | None):
         pass

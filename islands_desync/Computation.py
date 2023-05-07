@@ -26,9 +26,7 @@ class Computation:
         self.emigration = Emigration.remote(islands, select_algorithm)
         migration = RayMigration(island, self.emigration)
 
-        self.algorithm = create_algorithm_hpc(
-            n, migration, algorithm_params
-        )
+        self.algorithm = create_algorithm_hpc(n, migration, algorithm_params)
 
     def start(self):
         self.algorithm.run()
