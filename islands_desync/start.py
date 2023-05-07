@@ -1,10 +1,11 @@
 import asyncio
 import sys
 
-print(sys.path)
+from islands_desync.IslandRunner import IslandRunner
+from islands_desync.topologies import RingTopology
+
 
 import ray
-from Island import Island
 from selectAlgorithm import RandomSelect
 
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
@@ -12,7 +13,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
 )
 
 
-async def main():
+def main():
     if sys.argv[2] != " ":
         ray.init(_temp_dir=sys.argv[2])
 
@@ -25,46 +26,10 @@ async def main():
         series_number=1,
     )
 
-    islands = [Island.remote(i, RandomSelect()) for i in range(params.island_count)]
+    computation_refs = IslandRunner(RingTopology, RandomSelect, params).create()
 
-    # refs = [
-    #     island.start.remote(
-    #         island,
-    #         list(
-    #             map(
-    #                 lambda other_island: other_island[1],
-    #                 filter(
-    #                     lambda other_island: other_island[0] != island_id,
-    #                     enumerate(islands),
-    #                 ),
-    #             )
-    #         ),
-    #         params,
-    #     )
-    #     for island_id, island in enumerate(islands)
-    # ]
-
-    all_neighbours = [list(
-        map(
-            lambda other_island: other_island[1],
-            filter(
-                lambda other_island: other_island[0] != island_id,
-                enumerate(islands),
-            ),
-        )
-    )
-        for island_id, island in enumerate(islands)
-    ]
-
-    refs = [
-        island.start.remote(
-            island, neighbours, params
-        )
-        for island, neighbours in zip(islands, all_neighbours)
-    ]
-
-    await asyncio.wait(refs)
+    ray.get(computation_refs)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()

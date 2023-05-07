@@ -1,11 +1,11 @@
 from typing import Dict, List
 
-from islands_desync.topologies import Topology
+from .Topology import Topology
 
 
 class RingTopology(Topology):
-    def __init__(self, size):
-        super().__init__(size)
+    def __init__(self, size, create_object_method):
+        super().__init__(size, create_object_method)
 
     def create(self) -> Dict[int, List]:
         if self.size == 1:

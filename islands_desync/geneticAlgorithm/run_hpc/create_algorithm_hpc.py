@@ -1,6 +1,4 @@
 import json
-import os
-import sys
 
 from jmetal.operator import BinaryTournamentSelection
 from jmetal.problem.singleobjective.unconstrained import Rastrigin
@@ -12,7 +10,6 @@ from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import (
 from islands_desync.geneticAlgorithm.generator.island_solution_generator import (
     IslandSolutionGenerator,
 )
-from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
@@ -23,7 +20,7 @@ from datetime import datetime, timedelta
 
 
 def create_algorithm_hpc(
-    n, island, emigration, params: RunAlgorithmParams
+    n, migration, params: RunAlgorithmParams
 ) -> GeneticIslandAlgorithm:
     conf_file = "./islands_desync/geneticAlgorithm/algorithm/configurations/algorithm_configuration.json"
 
@@ -52,8 +49,6 @@ def create_algorithm_hpc(
     # if n==0:
     #     print ("W run_algorithm "+str(sys.argv[1])+"/"+str(sys.argv[4])+" WYSPA,  seria: "+ str(sys.argv[5])+",  interwał: "+str(sys.argv[7])+", liczba migrantów: "+str(sys.argv[6])+" - "+str(sys.argv[2])+" "+str(sys.argv[3]))
     #     print("W pliku json: "+str(configuration["number_of_islands"]))
-
-    migration = RayMigration(island, emigration)
 
     wait_date: datetime = datetime.now() + timedelta(seconds=30)
 

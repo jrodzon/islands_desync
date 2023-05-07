@@ -1,10 +1,6 @@
-import random
-from time import sleep
-from typing import List
-
 import ray
 from Emigration import Emigration
-from Immigrant import Immigrant
+from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
 
 from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import (
     create_algorithm_hpc,
@@ -28,8 +24,10 @@ class Computation:
         self.n: int = n
 
         self.emigration = Emigration.remote(islands, select_algorithm)
+        migration = RayMigration(island, self.emigration)
+
         self.algorithm = create_algorithm_hpc(
-            n, island, self.emigration, algorithm_params
+            n, migration, algorithm_params
         )
 
     def start(self):
@@ -39,12 +37,9 @@ class Computation:
 
         self.finish()
 
-
-        # while True:
-        #     self.iteration()
     def finish(self):
         ray.kill(self.emigration)
-        self.island.finish.remote()
+        ray.kill(self.island)
         ray.actor.exit_actor()
 
     # def iteration(self):
