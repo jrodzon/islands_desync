@@ -32,9 +32,6 @@ from ..utils import (
     result_saver,
     tsne,
 )
-
-from jmetal.logger import get_logger
-
 # import winsound
 
 
@@ -127,6 +124,9 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             (self.termination_criterion.max_evaluations - self.population_size)
             / self.offspring_population_size
         )
+
+
+        print("Starting" + (str(self.island) * 20))
 
         # self.migrant_selection_type=
         # "random", "maxDistance", "best", "worst"
@@ -727,9 +727,10 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createEmigrJson()
             self.createAllStepsDetailedPopulationJson()
 
-            self.readyForCumulativePopulPlot = False
+            self.readyForCumulativePopulPlot = True
             if self.island == 0:
                 while not self.readyForCumulativePopulPlot:
+                    print(" self.readyForCumulativePopulPlot:", self.readyForCumulativePopulPlot)
                     # time.sleep(0.5)
                     # self.createCsvWithTsne() # dla dim>3 robi tsne do dim=2 i 3
                     # print('\a')
@@ -741,7 +742,8 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
                 # print('\a')
 
             if self.island == 0:
-                self.writeSummaryResutlToConsoleAndFile()
+                print("self.writeSummaryResutlToConsoleAndFile()")
+                # self.writeSummaryResutlToConsoleAndFile()
                 # print('\a')
                 # time.sleep(1)
                 # print('\a')
