@@ -57,4 +57,4 @@ migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 
-python3 -u islands_desync/start.py 20 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u islands_desync/start.py 40 $tmpdir $number_of_migrants $migration_interval $dda $tta
