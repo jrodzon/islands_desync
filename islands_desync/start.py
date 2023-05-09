@@ -35,7 +35,7 @@ def main():
     with open(
         "logs"
         + "iterations_per_second"
-        + datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        + datetime.now().strftime("%m-%d-%Y_%H%M")
         + ".json",
         "w",
     ) as f:
