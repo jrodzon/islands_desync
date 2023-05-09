@@ -1,9 +1,9 @@
 import asyncio
+import json
 import sys
 
 from islands_desync.IslandRunner import IslandRunner
 from islands_desync.topologies import RingTopology
-
 
 import ray
 from selectAlgorithm import RandomSelect
@@ -28,7 +28,12 @@ def main():
 
     computation_refs = IslandRunner(RingTopology, RandomSelect, params).create()
 
-    ray.get(computation_refs)
+    results = ray.get(computation_refs)
+
+    iterations = {result["island"]: result for result in results}
+
+    with open("iterations_per_second" + ".json", "w") as f:
+        json.dump(iterations, f)
 
 
 if __name__ == "__main__":
