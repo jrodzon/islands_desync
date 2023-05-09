@@ -15,6 +15,8 @@
 module load python/3.10.4-gcccore-11.3.0
 source ~/rayenv/bin/activate
 
+set -x
+
 mkdir ~/io/"$SLURM_JOB_ID"
 
 tmpdir="$HOME/io/$SLURM_JOB_ID"
