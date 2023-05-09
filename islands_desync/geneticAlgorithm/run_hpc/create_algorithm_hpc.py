@@ -1,22 +1,19 @@
 import json
+from datetime import datetime, timedelta
 
 from jmetal.operator import BinaryTournamentSelection
 from jmetal.problem.singleobjective.unconstrained import Rastrigin
 from jmetal.util.termination_criterion import StoppingByEvaluations
 
-from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import (
-    GeneticIslandAlgorithm,
-)
-from islands_desync.geneticAlgorithm.generator.island_solution_generator import (
-    IslandSolutionGenerator,
-)
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
-    RunAlgorithmParams,
-)
+from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import \
+    GeneticIslandAlgorithm
+from islands_desync.geneticAlgorithm.generator.island_solution_generator import \
+    IslandSolutionGenerator
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
+    RunAlgorithmParams
 from islands_desync.geneticAlgorithm.utils import datetimer, myDefCrossover
-from islands_desync.geneticAlgorithm.utils.myDefMutation import MyUniformMutation
-
-from datetime import datetime, timedelta
+from islands_desync.geneticAlgorithm.utils.myDefMutation import \
+    MyUniformMutation
 
 
 def create_algorithm_hpc(

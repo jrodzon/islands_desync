@@ -4,9 +4,8 @@ import ray
 from Computation import Computation
 from selectAlgorithm import SelectAlgorithm
 
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
-    RunAlgorithmParams,
-)
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
+    RunAlgorithmParams
 
 
 @ray.remote

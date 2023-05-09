@@ -1,16 +1,16 @@
 import asyncio
 import json
 import sys
-
-from islands_desync.IslandRunner import IslandRunner
-from islands_desync.topologies import RingTopology
+import time
+from datetime import datetime
 
 import ray
 from selectAlgorithm import RandomSelect
 
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
-    RunAlgorithmParams,
-)
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
+    RunAlgorithmParams
+from islands_desync.IslandRunner import IslandRunner
+from islands_desync.topologies import RingTopology
 
 
 def main():
@@ -32,7 +32,12 @@ def main():
 
     iterations = {result["island"]: result for result in results}
 
-    with open("iterations_per_second" + ".json", "w") as f:
+    with open(
+        "iterations_per_second"
+        + datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
+        + ".json",
+        "w",
+    ) as f:
         json.dump(iterations, f)
 
 

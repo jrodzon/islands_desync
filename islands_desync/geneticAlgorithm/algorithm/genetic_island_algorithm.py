@@ -19,19 +19,10 @@ from jmetal.util.termination_criterion import TerminationCriterion
 
 from ..migrations.Migration import Migration
 from ..solution.float_island_solution import FloatIslandSolution
-from ..utils import (
-    boxPloter,
-    controller,
-    dataForPopulationPloter,
-    datetimer,
-    distance,
-    filename,
-    fileslister,
-    logger,
-    ploter,
-    result_saver,
-    tsne,
-)
+from ..utils import (boxPloter, controller, dataForPopulationPloter, datetimer,
+                     distance, filename, fileslister, logger, ploter,
+                     result_saver, tsne)
+
 # import winsound
 
 
@@ -124,7 +115,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             (self.termination_criterion.max_evaluations - self.population_size)
             / self.offspring_population_size
         )
-
 
         print("Starting" + (str(self.island) * 20))
 
@@ -730,7 +720,10 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.readyForCumulativePopulPlot = True
             if self.island == 0:
                 while not self.readyForCumulativePopulPlot:
-                    print(" self.readyForCumulativePopulPlot:", self.readyForCumulativePopulPlot)
+                    print(
+                        " self.readyForCumulativePopulPlot:",
+                        self.readyForCumulativePopulPlot,
+                    )
                     # time.sleep(0.5)
                     # self.createCsvWithTsne() # dla dim>3 robi tsne do dim=2 i 3
                     # print('\a')
