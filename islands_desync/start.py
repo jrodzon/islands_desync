@@ -33,7 +33,8 @@ def main():
     iterations = {result["island"]: result for result in results}
 
     with open(
-        "iterations_per_second"
+        "logs"
+        + "iterations_per_second"
         + datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
         + ".json",
         "w",
