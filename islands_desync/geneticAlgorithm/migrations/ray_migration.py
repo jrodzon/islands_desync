@@ -2,7 +2,7 @@ from typing import Dict, List
 
 import ray
 
-from islands_desync.Emigration import Emigration
+from islands_desync.islands.Emigration import Emigration
 from islands_desync.geneticAlgorithm.migrations.Migration import Migration
 
 

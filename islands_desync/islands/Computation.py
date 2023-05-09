@@ -1,16 +1,18 @@
 import time
 
 import ray
-from Emigration import Emigration
 
-from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import \
-    GeneticIslandAlgorithm
-from islands_desync.geneticAlgorithm.migrations.ray_migration import \
-    RayMigration
-from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import \
-    create_algorithm_hpc
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
-    RunAlgorithmParams
+from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import (
+    GeneticIslandAlgorithm,
+)
+from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
+from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import (
+    create_algorithm_hpc,
+)
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
+    RunAlgorithmParams,
+)
+from islands_desync.islands.Emigration import Emigration
 
 
 @ray.remote

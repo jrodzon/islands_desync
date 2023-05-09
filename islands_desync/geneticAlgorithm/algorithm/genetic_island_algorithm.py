@@ -19,9 +19,19 @@ from jmetal.util.termination_criterion import TerminationCriterion
 
 from ..migrations.Migration import Migration
 from ..solution.float_island_solution import FloatIslandSolution
-from ..utils import (boxPloter, controller, dataForPopulationPloter, datetimer,
-                     distance, filename, fileslister, logger, ploter,
-                     result_saver, tsne)
+from ..utils import (
+    boxPloter,
+    controller,
+    dataForPopulationPloter,
+    datetimer,
+    distance,
+    filename,
+    fileslister,
+    logger,
+    ploter,
+    result_saver,
+    tsne,
+)
 
 # import winsound
 

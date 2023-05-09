@@ -3,8 +3,9 @@ import random
 from typing import Dict, List
 
 from islands_desync.geneticAlgorithm.migrations.Migration import Migration
-from islands_desync.geneticAlgorithm.solution.float_island_solution import \
-    FloatIslandSolution
+from islands_desync.geneticAlgorithm.solution.float_island_solution import (
+    FloatIslandSolution,
+)
 
 
 class QueueMigration(Migration):

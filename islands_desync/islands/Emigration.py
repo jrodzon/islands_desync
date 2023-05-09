@@ -1,5 +1,6 @@
 import ray
-from selectAlgorithm import SelectAlgorithm
+
+from islands_desync.islands.selectAlgorithm import SelectAlgorithm
 
 
 @ray.remote

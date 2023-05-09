@@ -5,12 +5,13 @@ import time
 from datetime import datetime
 
 import ray
-from selectAlgorithm import RandomSelect
+from islands.selectAlgorithm import RandomSelect
 
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
-    RunAlgorithmParams
-from islands_desync.IslandRunner import IslandRunner
-from islands_desync.topologies import RingTopology
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
+    RunAlgorithmParams,
+)
+from islands.IslandRunner import IslandRunner
+from islands.topologies import RingTopology
 
 
 def main():
