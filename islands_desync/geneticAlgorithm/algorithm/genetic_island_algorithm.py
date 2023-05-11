@@ -126,8 +126,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             / self.offspring_population_size
         )
 
-        print("Starting" + (str(self.island) * 20))
-
         # self.migrant_selection_type=
         # "random", "maxDistance", "best", "worst"
 
@@ -655,7 +653,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.migrate_individuals()
             # todo: SPR CZY MIGRANT POPRAWIŁ WYNIK WYSPY - best w population[0] > best
             try:
-                print("Island %s iter: %s get popu" % (self.island, self.step_num))
+                # print("Island %s iter: %s get popu" % (self.island, self.step_num))
                 self.add_new_individuals()
             except:
                 pass
