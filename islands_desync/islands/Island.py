@@ -32,10 +32,10 @@ class Island:
         return self.computation
 
     def receive_immigrant(self, immigrant_iteration):
-        print(
-            "Wyspa %s: dostaje imigranta: %s"
-            % (self.island_id, str(immigrant_iteration)[:10])
-        )
+        # print(
+        #     "Wyspa %s: dostaje imigranta: %s"
+        #     % (self.island_id, str(immigrant_iteration)[:10])
+        # )
         self.immigrants.append(immigrant_iteration)
 
     def get_immigrants(self):
