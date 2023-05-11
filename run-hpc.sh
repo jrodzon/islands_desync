@@ -41,7 +41,7 @@ srun --nodes=1 --ntasks=1 -w "$head_node" \
     ray start --head --node-ip-address="$head_node_ip" --port=$port --temp-dir="$tmpdir" --block &
 
 # optional, though may be useful in certain versions of Ray < 1.0.
-#sleep 5
+sleep 5
 
 # number of nodes other than the head node
 worker_num=$((SLURM_JOB_NUM_NODES - 1))
@@ -50,7 +50,7 @@ for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
     srun --nodes=1 --ntasks=1 -w "$node_i" \
-        ray start --address "$ip_head" --block &
+        ray start --address "$ip_head" --temp-dir="$tmpdir" --block &
     sleep 1
 done
 
