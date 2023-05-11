@@ -1,4 +1,3 @@
-import time
 
 import ray
 
@@ -29,25 +28,24 @@ class Computation:
         self.n: int = n
 
         self.emigration = Emigration.remote(islands, select_algorithm)
-        migration = RayMigration(island, self.emigration)
+        self.migration = RayMigration(island, self.emigration)
 
         self.algorithm: GeneticIslandAlgorithm = create_algorithm_hpc(
-            n, migration, algorithm_params
+            n, self.migration, algorithm_params
         )
 
     def start(self):
-        start = time.time()
 
         self.algorithm.run()
         result = self.algorithm.get_result()
 
-        run_time = time.time() - start
-
         calculations = {
             "island": self.n,
             "iterations": self.algorithm.step_num,
-            "time": run_time,
-            "ips": self.algorithm.step_num / run_time,
+            "time": self.migration.run_time(),
+            "ips": self.algorithm.step_num / self.migration.run_time(),
+            "start": self.migration.start,
+            "end": self.migration.end
         }
 
         print(f"\nIsland: {self.n} Fitness: {result.objectives[0]}")

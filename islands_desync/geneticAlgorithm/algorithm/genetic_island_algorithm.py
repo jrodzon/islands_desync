@@ -17,7 +17,6 @@ from jmetal.util.evaluator import Evaluator
 from jmetal.util.generator import Generator
 from jmetal.util.termination_criterion import TerminationCriterion
 
-from ..migrations.Migration import Migration
 from ..solution.float_island_solution import FloatIslandSolution
 from ..utils import (
     boxPloter,
@@ -32,6 +31,7 @@ from ..utils import (
     result_saver,
     tsne,
 )
+from ...islands.Migration import Migration
 
 # import winsound
 
@@ -625,6 +625,9 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.saveDetailedPopulationDescriptionForThisStepInTab()
             self.savePopulationDiversitiesThreeOfKindForThisStepInTab()
 
+            # start measuring time
+            self.migration.start_time_measure()
+
         # PRZERYWA JESLI NIE WYSTARTOWAŁY WSZYSTKIE WYSPY
         # if self.step_num==85:
         #     ctrl = controller.Controller(self.path, self.island,self.want_run_end_communications)
@@ -702,6 +705,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             print("^ ^ ^ ", self.step_num, "last:", self.last_step)
 
         if (self.last_step - 1 < self.step_num) and not self.bylLog:
+            self.migration.end_time_measure()
             self.lastBest = self.solutions[0].objectives[0]
             # print("k o n c o w k a",self.island)
             self.saveXiYiFittnessWhileJump()
