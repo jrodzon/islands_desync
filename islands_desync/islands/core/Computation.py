@@ -1,13 +1,12 @@
 
 import ray
 
-from islands_desync.geneticAlgorithm.migrations.ray_migration_pipeline import RayMigrationPipeline
-from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import (
-    create_algorithm_hpc,
-)
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
-    RunAlgorithmParams,
-)
+from islands_desync.geneticAlgorithm.migrations.ray_migration_pipeline import \
+    RayMigrationPipeline
+from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import \
+    create_algorithm_hpc
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
+    RunAlgorithmParams
 from islands_desync.islands.core.Emigration import Emigration
 
 

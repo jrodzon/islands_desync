@@ -2,7 +2,8 @@ from typing import Dict, List
 
 import ray
 
-from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
+from islands_desync.geneticAlgorithm.migrations.ray_migration import \
+    RayMigration
 from islands_desync.islands.core.Emigration import Emigration
 
 

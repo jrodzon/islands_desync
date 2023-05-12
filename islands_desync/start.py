@@ -1,17 +1,14 @@
-import asyncio
 import json
 import sys
-import time
 from datetime import datetime
 
 import ray
-from islands.selectAlgorithm import RandomSelect
-
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
-    RunAlgorithmParams,
-)
 from islands.core.IslandRunner import IslandRunner
+from islands.selectAlgorithm import RandomSelect
 from islands.topologies import RingTopology
+
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
+    RunAlgorithmParams
 
 
 def main():

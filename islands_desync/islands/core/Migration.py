@@ -1,6 +1,6 @@
+import time
 from abc import ABC, abstractmethod
 from typing import Dict, List
-import time
 
 
 class Migration(ABC):

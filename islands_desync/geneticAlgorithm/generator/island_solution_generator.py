@@ -4,12 +4,10 @@ from jmetal.core.problem import Problem
 from jmetal.core.solution import BinarySolution, FloatSolution
 from jmetal.util.generator import Generator
 
-from islands_desync.geneticAlgorithm.solution.binary_island_solution import (
-    BinaryIslandSolution,
-)
-from islands_desync.geneticAlgorithm.solution.float_island_solution import (
-    FloatIslandSolution,
-)
+from islands_desync.geneticAlgorithm.solution.binary_island_solution import \
+    BinaryIslandSolution
+from islands_desync.geneticAlgorithm.solution.float_island_solution import \
+    FloatIslandSolution
 
 R = TypeVar("R")
 
