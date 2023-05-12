@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=my-workload
 
-#SBATCH --nodes=2
-#SBATCH --ntasks=48
+#SBATCH --nodes=11
+#SBATCH --ntasks=264
 
 
 #SBATCH --mem-per-cpu=4GB
@@ -41,7 +41,7 @@ srun --nodes=1 --ntasks=1 -w "$head_node" \
     ray start --head --node-ip-address="$head_node_ip" --port=$port --temp-dir="$tmpdir" --block &
 
 # optional, though may be useful in certain versions of Ray < 1.0.
-sleep 5
+sleep 10
 
 # number of nodes other than the head node
 worker_num=$((SLURM_JOB_NUM_NODES - 1))
@@ -59,4 +59,4 @@ migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 
-python3 -u islands_desync/start.py 40 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u islands_desync/start.py 200 $tmpdir $number_of_migrants $migration_interval $dda $tta
