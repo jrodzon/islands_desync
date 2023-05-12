@@ -52,7 +52,7 @@ for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
     srun --nodes=1 --ntasks=1 -w "$node_i" \
-        ray start --address "$ip_head" --block &
+        export TMPDIR="$tmpdir" && ray start --address "$ip_head" --block &
     sleep 1
 done
 
