@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=my-workload
 
-#SBATCH --nodes=11
-#SBATCH --ntasks=264
+#SBATCH --nodes=2
+#SBATCH --ntasks=48
 
 
 #SBATCH --mem-per-cpu=4GB
@@ -20,6 +20,8 @@ set -x
 mkdir ~/io/"$SLURM_JOB_ID"
 
 tmpdir="$HOME/io/$SLURM_JOB_ID"
+
+export TMPDIR=$tmpdir
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 
@@ -50,7 +52,7 @@ for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
     srun --nodes=1 --ntasks=1 -w "$node_i" \
-        ray start --address "$ip_head" --temp-dir="$tmpdir" --block &
+        ray start --address "$ip_head" --block &
     sleep 1
 done
 
@@ -59,4 +61,4 @@ migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 
-python3 -u islands_desync/start.py 200 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u islands_desync/start.py 40 $tmpdir $number_of_migrants $migration_interval $dda $tta
