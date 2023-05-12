@@ -31,7 +31,7 @@ from ..utils import (
     result_saver,
     tsne,
 )
-from ...islands.Migration import Migration
+from ...islands.core.Migration import Migration
 
 # import winsound
 

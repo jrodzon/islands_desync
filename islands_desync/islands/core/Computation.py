@@ -1,17 +1,14 @@
 
 import ray
 
-from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import (
-    GeneticIslandAlgorithm,
-)
-from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
+from islands_desync.geneticAlgorithm.migrations.ray_migration_pipeline import RayMigrationPipeline
 from islands_desync.geneticAlgorithm.run_hpc.create_algorithm_hpc import (
     create_algorithm_hpc,
 )
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
-from islands_desync.islands.Emigration import Emigration
+from islands_desync.islands.core.Emigration import Emigration
 
 
 @ray.remote
@@ -28,9 +25,9 @@ class Computation:
         self.n: int = n
 
         self.emigration = Emigration.remote(islands, select_algorithm)
-        self.migration = RayMigration(island, self.emigration)
+        self.migration = RayMigrationPipeline(island, self.emigration)
 
-        self.algorithm: GeneticIslandAlgorithm = create_algorithm_hpc(
+        self.algorithm = create_algorithm_hpc(
             n, self.migration, algorithm_params
         )
 

@@ -2,8 +2,8 @@ from typing import Dict, List
 
 import ray
 
-from islands_desync.islands.Emigration import Emigration
-from islands_desync.islands.Migration import Migration
+from islands_desync.islands.core.Emigration import Emigration
+from islands_desync.islands.core.Migration import Migration
 
 
 class RayMigration(Migration):

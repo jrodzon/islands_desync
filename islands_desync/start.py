@@ -10,7 +10,7 @@ from islands.selectAlgorithm import RandomSelect
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
-from islands.IslandRunner import IslandRunner
+from islands.core.IslandRunner import IslandRunner
 from islands.topologies import RingTopology
 
 
