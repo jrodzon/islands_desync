@@ -1,7 +1,8 @@
 import ray
 
-from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import \
-    RunAlgorithmParams
+from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
+    RunAlgorithmParams,
+)
 from islands_desync.islands.core.Computation import Computation
 from islands_desync.islands.selectAlgorithm import SelectAlgorithm
 

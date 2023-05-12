@@ -5,23 +5,30 @@ from math import trunc
 import pika as pika
 from algorithm.genetic_island_algorithm import GeneticIslandAlgorithm
 from generator.island_solution_generator import IslandSolutionGenerator
-from jmetal.operator import (BinaryTournament2Selection,
-                             BinaryTournamentSelection, BitFlipMutation,
-                             PolynomialMutation, SBXCrossover, SPXCrossover,
-                             UniformMutation)
+from jmetal.operator import (
+    BinaryTournament2Selection,
+    BinaryTournamentSelection,
+    BitFlipMutation,
+    PolynomialMutation,
+    SBXCrossover,
+    SPXCrossover,
+    UniformMutation,
+)
 from jmetal.operator.selection import RouletteWheelSelection
 from jmetal.problem.singleobjective.unconstrained import Rastrigin, Sphere
 from jmetal.util.termination_criterion import StoppingByEvaluations
 
-from islands_desync.geneticAlgorithm.migrations.queue_migration import \
-    QueueMigration
-from islands_desync.geneticAlgorithm.utils import (datetimer, myDefCrossover,
-                                                   myDefMutation,
-                                                   myDefProblems)
-from islands_desync.geneticAlgorithm.utils.create_rabbitmq_channels import \
-    CreateRabbitmqChannels
-from islands_desync.geneticAlgorithm.utils.myDefMutation import \
-    MyUniformMutation
+from islands_desync.geneticAlgorithm.migrations.queue_migration import QueueMigration
+from islands_desync.geneticAlgorithm.utils import (
+    datetimer,
+    myDefCrossover,
+    myDefMutation,
+    myDefProblems,
+)
+from islands_desync.geneticAlgorithm.utils.create_rabbitmq_channels import (
+    CreateRabbitmqChannels,
+)
+from islands_desync.geneticAlgorithm.utils.myDefMutation import MyUniformMutation
 
 
 def run():

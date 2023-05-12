@@ -9,12 +9,14 @@ class Migration(ABC):
         self.end: float | None = None
 
     @abstractmethod
-    def migrate_individuals(self, individuals_to_migrate, iteration_number: int, island_number: int):
+    def migrate_individuals(
+        self, individuals_to_migrate, iteration_number: int, island_number: int
+    ):
         pass
 
     @abstractmethod
     def receive_individuals(
-            self, step_num: int, evaluations: int
+        self, step_num: int, evaluations: int
     ) -> (List, Dict | None):
         pass
 
