@@ -51,8 +51,8 @@ worker_num=$((SLURM_JOB_NUM_NODES - 1))
 for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
-    srun --nodes=1 --ntasks=1 -w "$node_i" \
-        TMPDIR="$tmpdir" ray start --address "$ip_head" --block &
+    srun --nodes=1 --ntasks=1 -w "$node_i" --export=ALL,TMPDIR="$tmpdir" \
+        ray start --address "$ip_head" --block &
     sleep 1
 done
 
