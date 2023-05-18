@@ -184,10 +184,10 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
                     + str(self.island)
                     + "\n\n\n"
                 )
-        else:
-            while not (os.path.exists(self.path)):
-                print("w" + str(self.island) + " waits")
-                time.sleep(0.5)
+        # else:
+            # while not (os.path.exists(self.path)):
+            #     print("w" + str(self.island) + " waits")
+            #     time.sleep(0.5)
 
         self.logfile = logger.Logger(
             self.path + "/W" + str(self.island) + " log",

@@ -31,4 +31,6 @@ class IslandRunner:
             ]
         )
 
+        print("Starting " + str(len(computations)) + "comps")
+
         return [computation.start.remote() for computation in computations]
