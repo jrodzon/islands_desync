@@ -748,7 +748,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
 
             if self.island == 0:
                 print("self.writeSummaryResutlToConsoleAndFile()")
-                # self.writeSummaryResutlToConsoleAndFile()
+                self.writeSummaryResutlToConsoleAndFile()
                 # print('\a')
                 # time.sleep(1)
                 # print('\a')
