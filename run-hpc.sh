@@ -22,6 +22,7 @@ mkdir ~/io/"$SLURM_JOB_ID"
 tmpdir="$HOME/io/$SLURM_JOB_ID"
 
 export TMPDIR=$tmpdir
+export RAY_TMPDIR=$tmpdir
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 
@@ -51,7 +52,7 @@ worker_num=$((SLURM_JOB_NUM_NODES - 1))
 for ((i = 1; i <= worker_num; i++)); do
     node_i=${nodes_array[$i]}
     echo "Starting WORKER $i at $node_i"
-    srun --nodes=1 --ntasks=1 -w "$node_i" --export=ALL,TMPDIR="$tmpdir" \
+    srun --nodes=1 --ntasks=1 -w "$node_i" --export=ALL,RAY_TMPDIR="$tmpdir" \
         ray start --address "$ip_head" --block &
     sleep 1
 done
