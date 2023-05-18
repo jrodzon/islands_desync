@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 import ray
@@ -32,5 +33,8 @@ class IslandRunner:
         )
 
         print("Starting " + str(len(computations)) + "comps")
+
+        time.sleep(10)
+        print("-"*30)
 
         return [computation.start.remote() for computation in computations]
