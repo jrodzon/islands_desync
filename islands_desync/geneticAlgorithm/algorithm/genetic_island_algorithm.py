@@ -716,6 +716,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createJumpResultsJson()
             self.createAllStepsResultsJson()
             self.saveTabsAndRuningTimeInLogFile()
+            print("Koniec" + str(self.island))
             self.ctrl.endOfProcess(
                 self.island, self.lastBest
             )  # tworzy plik END.ktrl - KONTROLNY Z WYNIKIEM Z TEJ WYSPY
@@ -729,17 +730,17 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createEmigrJson()
             self.createAllStepsDetailedPopulationJson()
 
-            self.readyForCumulativePopulPlot = True
+            # self.readyForCumulativePopulPlot = False
             if self.island == 0:
                 while not self.readyForCumulativePopulPlot:
                     print(
                         " self.readyForCumulativePopulPlot:",
                         self.readyForCumulativePopulPlot,
                     )
-                    # time.sleep(0.5)
+                    time.sleep(1)
                     # self.createCsvWithTsne() # dla dim>3 robi tsne do dim=2 i 3
                     # print('\a')
-                    self.createSpaceDiversityPopulationPlots()  # dla każdej wyspy i cumulative - jeśli w jsonie jest True - korzysta z csv z tsne
+                    # self.createSpaceDiversityPopulationPlots()  # dla każdej wyspy i cumulative - jeśli w jsonie jest True - korzysta z csv z tsne
                     # print('\a')
                 # self.createAllIslandsDiversityPlots()
                 # print('\a')
@@ -747,7 +748,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
                 # print('\a')
 
             if self.island == 0:
-                print("self.writeSummaryResutlToConsoleAndFile()")
                 self.writeSummaryResutlToConsoleAndFile()
                 # print('\a')
                 # time.sleep(1)
