@@ -17,9 +17,11 @@ source ~/rayenv/bin/activate
 
 set -x
 
-mkdir ~/io/"$SLURM_JOB_ID"
+#mkdir ~/io/"$SLURM_JOB_ID"
 
-tmpdir="$HOME/io/$SLURM_JOB_ID"
+#tmpdir="$HOME/io/$SLURM_JOB_ID"
+mkdir "/tmp/plganowak/$SLURM_JOB_ID"
+tmpdir="/tmp/plganowak/$SLURM_JOB_ID"
 
 export TMPDIR=$tmpdir
 export RAY_TMPDIR=$tmpdir
