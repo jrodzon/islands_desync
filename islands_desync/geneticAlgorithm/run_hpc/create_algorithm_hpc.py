@@ -50,26 +50,6 @@ def create_algorithm_hpc(
     #     print ("W run_algorithm "+str(sys.argv[1])+"/"+str(sys.argv[4])+" WYSPA,  seria: "+ str(sys.argv[5])+",  interwał: "+str(sys.argv[7])+", liczba migrantów: "+str(sys.argv[6])+" - "+str(sys.argv[2])+" "+str(sys.argv[3]))
     #     print("W pliku json: "+str(configuration["number_of_islands"]))
 
-    # # KATALOG NA REZULTATY
-    # if n == 0:
-    #     DirectoryPreparation(problem=problem,
-    #                          island=n,
-    #                          number_of_islands=configuration["number_of_islands"],
-    #                          population_size=POPULATION_SIZE,
-    #                          offspring_population_size=OFFSPRING_POPULATION_SIZE,
-    #                          termination_criterion=StoppingByEvaluations(
-    #                              max_evaluations=NUMBER_OF_EVALUATIONS
-    #                          ),
-    #                          want_run_end_communications=configuration["want_run_end_communications"],
-    #                          par_date=params.dda,
-    #                          par_time=params.tta,
-    #                          migrant_selection_type=configuration["migrant_selection_type"],
-    #                          migration_interval=params.migration_interval,
-    #                          number_of_emigrants=params.number_of_emigrants
-    #                          ).create_dirs()
-
-    wait_date: datetime = datetime.now() + timedelta(seconds=30)
-
     genetic_island_algorithm = GeneticIslandAlgorithm(
         problem=problem,
         population_size=POPULATION_SIZE,
@@ -99,7 +79,7 @@ def create_algorithm_hpc(
         # selection=BinaryTournamentSelection(),
         ###
         migration_interval=params.migration_interval,  # configuration["migration_interval"],
-        number_of_islands=configuration["number_of_islands"],
+        number_of_islands= params.island_count,
         number_of_emigrants=params.number_of_emigrants,  # configuration["number_of_migrants"],
         island=n,
         want_create_boxplot=configuration["want_create_boxplot"],
@@ -124,8 +104,7 @@ def create_algorithm_hpc(
         termination_criterion=StoppingByEvaluations(
             max_evaluations=NUMBER_OF_EVALUATIONS
         ),
-        population_generator=IslandSolutionGenerator(island_number=n),
-        wait_date=wait_date,
+        population_generator=IslandSolutionGenerator(island_number=n)
     )
 
     return genetic_island_algorithm

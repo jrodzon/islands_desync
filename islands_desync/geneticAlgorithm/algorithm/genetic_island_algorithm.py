@@ -226,8 +226,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         self.nowi = False
         self.bylLog = False
 
-        self.wait_date = wait_date
-
     def __str__(self):
         return "genetic_island_algorithm"
 
@@ -616,8 +614,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         self.step_num = self.step_num + 1
 
         if 1 == self.step_num:
-            # WAIT FOR OTHER ISLANDS
-            # time.sleep((self.wait_date - datetime.now()).seconds)
             self.migration.wait_for_all_start()
 
             self.paramJson()
