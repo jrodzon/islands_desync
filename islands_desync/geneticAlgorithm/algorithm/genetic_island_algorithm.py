@@ -73,7 +73,6 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         wyspWRun: int,
         seria: int,
         migration: Migration,
-        wait_date: datetime,
         termination_criterion: TerminationCriterion = store.default_termination_criteria,
         population_generator: Generator = store.default_generator,
         population_evaluator: Evaluator = store.default_evaluator,
