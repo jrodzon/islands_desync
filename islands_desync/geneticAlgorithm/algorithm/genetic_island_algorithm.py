@@ -175,7 +175,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         )
         self.fullPath = self.path + "/" + self.Fname
 
-        # KATALOG NA REZULTATY
+        #KATALOG NA REZULTATY
         if self.island == 0:
             os.makedirs(self.path)
             if self.want_run_end_communications:
@@ -617,7 +617,8 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
 
         if 1 == self.step_num:
             # WAIT FOR OTHER ISLANDS
-            time.sleep((self.wait_date - datetime.now()).seconds)
+            # time.sleep((self.wait_date - datetime.now()).seconds)
+            self.migration.wait_for_all_start()
 
             self.paramJson()
             self.lastBest = self.solutions[0].objectives[0]
@@ -731,23 +732,25 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createAllStepsDetailedPopulationJson()
 
             # self.readyForCumulativePopulPlot = False
-            if self.island == 0:
-                while not self.readyForCumulativePopulPlot:
-                    print(
-                        " self.readyForCumulativePopulPlot:",
-                        self.readyForCumulativePopulPlot,
-                    )
-                    time.sleep(1)
-                    # self.createCsvWithTsne() # dla dim>3 robi tsne do dim=2 i 3
-                    # print('\a')
-                    # self.createSpaceDiversityPopulationPlots()  # dla każdej wyspy i cumulative - jeśli w jsonie jest True - korzysta z csv z tsne
+            # if self.island == 0:
+            #     while not self.readyForCumulativePopulPlot:
+            #         print(
+            #             " self.readyForCumulativePopulPlot:",
+            #             self.readyForCumulativePopulPlot,
+            #         )
+            #         time.sleep(1)
+            #         # self.createCsvWithTsne() # dla dim>3 robi tsne do dim=2 i 3
+            #         # print('\a')
+            #         self.createSpaceDiversityPopulationPlots()  # dla każdej wyspy i cumulative - jeśli w jsonie jest True - korzysta z csv z tsne
                     # print('\a')
                 # self.createAllIslandsDiversityPlots()
                 # print('\a')
                 # self.createAllIslandsResultPlot()
                 # print('\a')
+            self.migration.signal_finish()
 
             if self.island == 0:
+                self.migration.wait_for_finish()
                 self.writeSummaryResutlToConsoleAndFile()
                 # print('\a')
                 # time.sleep(1)

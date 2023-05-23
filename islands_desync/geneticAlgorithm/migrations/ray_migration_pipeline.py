@@ -4,11 +4,12 @@ import ray
 
 from islands_desync.geneticAlgorithm.migrations.ray_migration import RayMigration
 from islands_desync.islands.core.Emigration import Emigration
+from islands_desync.islands.core.SignalActor import SignalActor
 
 
 class RayMigrationPipeline(RayMigration):
-    def __init__(self, islandActor, emigration: Emigration):
-        super().__init__(islandActor, emigration)
+    def __init__(self, islandActor, emigration: Emigration, signal_actor: SignalActor):
+        super().__init__(islandActor, emigration, signal_actor)
         self.new_individuals_refs = self.islandActor.get_immigrants.remote()
 
     def receive_individuals(

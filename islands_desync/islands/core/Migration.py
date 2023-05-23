@@ -10,13 +10,13 @@ class Migration(ABC):
 
     @abstractmethod
     def migrate_individuals(
-        self, individuals_to_migrate, iteration_number: int, island_number: int
+            self, individuals_to_migrate, iteration_number: int, island_number: int
     ):
         pass
 
     @abstractmethod
     def receive_individuals(
-        self, step_num: int, evaluations: int
+            self, step_num: int, evaluations: int
     ) -> (List, Dict | None):
         pass
 
@@ -28,3 +28,12 @@ class Migration(ABC):
 
     def run_time(self):
         return self.end - self.start
+
+    def wait_for_all_start(self):
+        pass
+
+    def wait_for_finish(self):
+        pass
+
+    def signal_finish(self):
+        pass

@@ -4,7 +4,7 @@ dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 tmpdir=" "
 
-#cd islands_desync
+RAY_DEDUP_LOGS=0
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 

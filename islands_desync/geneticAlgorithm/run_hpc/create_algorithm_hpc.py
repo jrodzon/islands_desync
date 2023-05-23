@@ -11,6 +11,7 @@ from islands_desync.geneticAlgorithm.algorithm.genetic_island_algorithm import (
 from islands_desync.geneticAlgorithm.generator.island_solution_generator import (
     IslandSolutionGenerator,
 )
+from islands_desync.geneticAlgorithm.run_hpc.directory_preparation import DirectoryPreparation
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
@@ -19,7 +20,7 @@ from islands_desync.geneticAlgorithm.utils.myDefMutation import MyUniformMutatio
 
 
 def create_algorithm_hpc(
-    n, migration, params: RunAlgorithmParams
+        n, migration, params: RunAlgorithmParams
 ) -> GeneticIslandAlgorithm:
     conf_file = "./islands_desync/geneticAlgorithm/algorithm/configurations/algorithm_configuration.json"
 
@@ -48,6 +49,24 @@ def create_algorithm_hpc(
     # if n==0:
     #     print ("W run_algorithm "+str(sys.argv[1])+"/"+str(sys.argv[4])+" WYSPA,  seria: "+ str(sys.argv[5])+",  interwał: "+str(sys.argv[7])+", liczba migrantów: "+str(sys.argv[6])+" - "+str(sys.argv[2])+" "+str(sys.argv[3]))
     #     print("W pliku json: "+str(configuration["number_of_islands"]))
+
+    # # KATALOG NA REZULTATY
+    # if n == 0:
+    #     DirectoryPreparation(problem=problem,
+    #                          island=n,
+    #                          number_of_islands=configuration["number_of_islands"],
+    #                          population_size=POPULATION_SIZE,
+    #                          offspring_population_size=OFFSPRING_POPULATION_SIZE,
+    #                          termination_criterion=StoppingByEvaluations(
+    #                              max_evaluations=NUMBER_OF_EVALUATIONS
+    #                          ),
+    #                          want_run_end_communications=configuration["want_run_end_communications"],
+    #                          par_date=params.dda,
+    #                          par_time=params.tta,
+    #                          migrant_selection_type=configuration["migrant_selection_type"],
+    #                          migration_interval=params.migration_interval,
+    #                          number_of_emigrants=params.number_of_emigrants
+    #                          ).create_dirs()
 
     wait_date: datetime = datetime.now() + timedelta(seconds=30)
 

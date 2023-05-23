@@ -7,6 +7,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
 from islands_desync.islands.core.Island import Island
+from islands_desync.islands.core.SignalActor import SignalActor
 
 
 class IslandRunner:
@@ -25,16 +26,35 @@ class IslandRunner:
             self.params.island_count, lambda i: islands[i]
         ).create()
 
+        # computations = [
+        #     ray.get(
+        #         islands[0].start.remote(islands[0], topology[0], self.params)
+        #     )
+        # ]
+        #
+        # from glob import glob
+        # paths = glob(".", recursive=True)
+        # for p in paths:
+        #     print(p)
+        #
+        # computations.extend(
+        #     ray.get(
+        #         [
+        #             island.start.remote(island, topology[island_id], self.params)
+        #             for island_id, island in enumerate(islands[1:])
+        #         ]
+        #     )
+        # )
+
+        signal_actor = SignalActor.remote(self.params.island_count)
+
         computations = ray.get(
             [
-                island.start.remote(island, topology[island_id], self.params)
+                island.start.remote(island, topology[island_id], self.params, signal_actor)
                 for island_id, island in enumerate(islands)
             ]
         )
 
         print("Starting " + str(len(computations)) + "comps")
-
-        time.sleep(10)
-        print("-"*30)
 
         return [computation.start.remote() for computation in computations]

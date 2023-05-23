@@ -4,6 +4,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
 from islands_desync.islands.core.Computation import Computation
+from islands_desync.islands.core.SignalActor import SignalActor
 from islands_desync.islands.selectAlgorithm import SelectAlgorithm
 
 
@@ -17,7 +18,7 @@ class Island:
         self.select_algorithm: SelectAlgorithm = select_algorithm
 
     def start(
-        self, island_handle, islands: ["Island"], algorithm_params: RunAlgorithmParams
+        self, island_handle, islands: ["Island"], algorithm_params: RunAlgorithmParams, signal_actor: SignalActor
     ):
         self.islands = islands
         self.computation = Computation.remote(
@@ -26,6 +27,7 @@ class Island:
             islands,
             self.select_algorithm,
             algorithm_params,
+            signal_actor
         )
 
         return self.computation

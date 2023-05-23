@@ -10,6 +10,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
 from islands_desync.islands.core.Emigration import Emigration
+from islands_desync.islands.core.SignalActor import SignalActor
 
 
 @ray.remote
@@ -21,12 +22,13 @@ class Computation:
         islands,
         select_algorithm,
         algorithm_params: RunAlgorithmParams,
+        signal_actor: SignalActor
     ):
         self.island = island
         self.n: int = n
 
         self.emigration = Emigration.remote(islands, select_algorithm)
-        self.migration = RayMigrationPipeline(island, self.emigration)
+        self.migration = RayMigrationPipeline(island, self.emigration, signal_actor)
 
         self.algorithm = create_algorithm_hpc(n, self.migration, algorithm_params)
 

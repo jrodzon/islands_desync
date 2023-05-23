@@ -1,5 +1,6 @@
 import dataclasses
 import os
+import time
 
 from islands_desync.geneticAlgorithm.utils import filename
 
