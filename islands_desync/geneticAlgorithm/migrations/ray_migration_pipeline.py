@@ -14,7 +14,7 @@ class RayMigrationPipeline(RayMigration):
 
     def receive_individuals(
         self, step_num: int, evaluations: int
-    ) -> (List, Dict | None):
+    ) :
         new_individuals = ray.get(self.new_individuals_refs)
         self.new_individuals_refs = self.islandActor.get_immigrants.remote()
 

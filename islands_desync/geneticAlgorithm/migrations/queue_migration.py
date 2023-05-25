@@ -36,7 +36,7 @@ class QueueMigration(Migration):
 
     def receive_individuals(
         self, step_num: int, evaluations: int
-    ) -> (List, Dict | None):
+    ) :
         new_individuals = []
         emigration_at_step_num = None
         for i in range(0, 5):

@@ -24,7 +24,7 @@ class RayMigration(Migration):
 
     def receive_individuals(
         self, step_num: int, evaluations: int
-    ) -> (List, Dict | None):
+    ) :
         new_individuals = ray.get(self.islandActor.get_immigrants.remote())
 
         new_individuals, migrant_iteration_numbers = zip(*new_individuals)
