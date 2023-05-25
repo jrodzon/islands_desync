@@ -4,7 +4,7 @@ dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
 tmpdir="/tmp/ray"
 
-RAY_DEDUP_LOGS=0
+export RAY_DEDUP_LOGS=0
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 

@@ -183,16 +183,18 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
                     + str(self.island)
                     + "\n\n\n"
                 )
-        else:
-            while not (os.path.exists(self.path)):
-                print("w" + str(self.island) + " waits")
-                time.sleep(1)
+        # else:
+        #     while not (os.path.exists(self.path)):
+        #         print("w" + str(self.island) + " waits")
+        #         time.sleep(1)
 
-        self.logfile = logger.Logger(
-            self.path + "/W" + str(self.island) + " log",
-            self,
-            self.want_run_end_communications,
-        )
+
+        # TWORZENIE TEGO PLIKU POWODUJE BŁęDY
+        # self.logfile = logger.Logger(
+        #     self.path + "/W" + str(self.island) + " log",
+        #     self,
+        #     self.want_run_end_communications,
+        # )
 
         if self.island == 0:
             self.resultfile = logger.Logger(
@@ -711,7 +713,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createJsonAllStepsDiversityJson()
             self.createJumpResultsJson()
             self.createAllStepsResultsJson()
-            self.saveTabsAndRuningTimeInLogFile()
+            # self.saveTabsAndRuningTimeInLogFile()
             print("Koniec" + str(self.island))
             self.ctrl.endOfProcess(
                 self.island, self.lastBest
@@ -720,7 +722,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
             self.createBoxplot()  # rozkład fitness z jsona - ta wyspa
             # self.createDiversityPlots()                        # przebieg różnorodności populacji z tab_diversityX i Y - ta wyspa
             # tab_diversityYminOdchStd i tab_diversityYsrOdchStd"""
-            self.logfile.saveLog()
+            # self.logfile.saveLog()
             # self.emigrLog.writeTabLog(self.tab_emigrants)
             # self.emigrLog.saveLog()
             self.createEmigrJson()
