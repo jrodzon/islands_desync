@@ -5,7 +5,7 @@ import time
 from islands_desync.geneticAlgorithm.utils import filename
 
 
-@dataclasses.dataclass(kw_only=True)
+@dataclasses.dataclass
 class DirectoryPreparation:
     problem: any
     island: int

@@ -1,7 +1,7 @@
 import dataclasses
 
 
-@dataclasses.dataclass(kw_only=True)
+@dataclasses.dataclass
 class RunAlgorithmParams:
     island_count: int
     number_of_emigrants: int
