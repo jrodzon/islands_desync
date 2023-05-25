@@ -2,7 +2,7 @@ number_of_migrants=5
 migration_interval=5
 dda=$(date +%y%m%d)
 tta=$(date +g%H%M%S)
-tmpdir=" "
+tmpdir="/tmp/ray"
 
 RAY_DEDUP_LOGS=0
 
