@@ -33,6 +33,7 @@ class Computation:
         self.algorithm = create_algorithm_hpc(n, self.migration, algorithm_params)
 
     def start(self):
+        print("Starting comp")
         self.algorithm.run()
         result = self.algorithm.get_result()
 

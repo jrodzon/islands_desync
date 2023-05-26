@@ -30,6 +30,8 @@ class Island:
             signal_actor
         )
 
+        print("Comp created")
+
         return self.computation
 
     def receive_immigrant(self, immigrant_iteration):
