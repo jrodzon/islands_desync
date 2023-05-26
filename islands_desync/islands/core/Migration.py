@@ -17,7 +17,7 @@ class Migration(ABC):
     @abstractmethod
     def receive_individuals(
             self, step_num: int, evaluations: int
-    ) :
+    ):
         pass
 
     def start_time_measure(self):

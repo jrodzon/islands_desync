@@ -18,7 +18,6 @@ class Logger:
             self.logArray.append(co[i])
 
     def saveLog(self):
-        print("Pisanie do logu" + str(self.fileSB))
         for i in range(len(self.logArray)):
             print(self.logArray[i])
             self.fileSB.write(self.logArray[i])

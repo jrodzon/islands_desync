@@ -34,6 +34,8 @@ class IslandRunner:
             )
         ]
 
+        time.sleep(15)
+
         computations.extend(
             ray.get(
                 [
