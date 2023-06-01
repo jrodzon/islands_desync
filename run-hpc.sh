@@ -10,18 +10,14 @@
 
 #SBATCH -A plgsano4-cpu
 
-#git clone https://github.com/youngdashu/islands_desync.git
 
 module load python/3.10.4-gcccore-11.3.0
 source ~/rayenv/bin/activate
 
 set -x
 
-#mkdir ~/io/"$SLURM_JOB_ID"
-
-#tmpdir="$HOME/io/$SLURM_JOB_ID"
-mkdir "/tmp/plganowak/$SLURM_JOB_ID"
-tmpdir="/tmp/plganowak/$SLURM_JOB_ID"
+mkdir "/tmp/$USER/$SLURM_JOB_ID"
+tmpdir="/tmp/$USER/$SLURM_JOB_ID"
 
 export TMPDIR=$tmpdir
 export RAY_TMPDIR=$tmpdir
