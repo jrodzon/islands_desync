@@ -8,6 +8,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
 )
 from islands_desync.islands.core.Island import Island
 from islands_desync.islands.core.SignalActor import SignalActor
+from islands_desync.islands.topologies.TorusTopology import TorusTopology
 
 
 class IslandRunner:
@@ -24,7 +25,12 @@ class IslandRunner:
 
         topology = self.CreateTopology(
             self.params.island_count, lambda i: islands[i]
-        ).create()
+        )
+
+        if isinstance(topology, TorusTopology):
+            topology = topology.create(5, self.params.island_count // 5)
+        else:
+            topology = topology.create()
 
         signal_actor = SignalActor.remote(self.params.island_count)
 

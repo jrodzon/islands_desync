@@ -10,6 +10,7 @@ from islands.topologies import RingTopology
 from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
     RunAlgorithmParams,
 )
+from islands_desync.islands.topologies.TorusTopology import TorusTopology
 
 
 def main():
@@ -25,7 +26,7 @@ def main():
         series_number=1,
     )
 
-    computation_refs = IslandRunner(RingTopology, RandomSelect, params).create()
+    computation_refs = IslandRunner(TorusTopology, RandomSelect, params).create()
 
     results = ray.get(computation_refs)
 

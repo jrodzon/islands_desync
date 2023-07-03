@@ -27,7 +27,3 @@ class TorusTopology(Topology):
 
         return res
 
-
-TorusTopology(0, 1).create(4, 3)
-
-
