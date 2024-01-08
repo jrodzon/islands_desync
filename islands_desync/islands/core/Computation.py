@@ -13,7 +13,7 @@ from islands_desync.islands.core.Emigration import Emigration
 from islands_desync.islands.core.SignalActor import SignalActor
 
 
-@ray.remote
+@ray.remote(num_cpus=1)
 class Computation:
     def __init__(
         self,
@@ -27,7 +27,7 @@ class Computation:
         self.island = island
         self.n: int = n
 
-        self.emigration = Emigration.remote(islands, select_algorithm)
+        self.emigration = Emigration(islands, select_algorithm)
         self.migration = RayMigrationPipeline(island, self.emigration, signal_actor)
 
         self.algorithm = create_algorithm_hpc(n, self.migration, algorithm_params)

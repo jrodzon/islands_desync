@@ -3,7 +3,6 @@ import ray
 from islands_desync.islands.selectAlgorithm import SelectAlgorithm
 
 
-@ray.remote
 class Emigration:
     def __init__(self, islands, select_algorithm: SelectAlgorithm):
         self.islands = islands

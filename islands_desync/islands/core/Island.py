@@ -8,7 +8,7 @@ from islands_desync.islands.core.SignalActor import SignalActor
 from islands_desync.islands.selectAlgorithm import SelectAlgorithm
 
 
-@ray.remote
+@ray.remote(num_cpus=1)
 class Island:
     def __init__(self, island_id: int, select_algorithm: SelectAlgorithm):
         self.island_id: int = island_id
@@ -30,15 +30,9 @@ class Island:
             signal_actor
         )
 
-        print("Comp created")
-
         return self.computation
 
     def receive_immigrant(self, immigrant_iteration):
-        # print(
-        #     "Wyspa %s: dostaje imigranta: %s"
-        #     % (self.island_id, str(immigrant_iteration)[:10])
-        # )
         self.immigrants.append(immigrant_iteration)
 
     def get_immigrants(self):
