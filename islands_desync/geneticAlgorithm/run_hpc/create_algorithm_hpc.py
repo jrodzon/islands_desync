@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timedelta
 
-from jmetal.operator import BinaryTournamentSelection
+from jmetal.operator import BinaryTournamentSelection, BitFlipMutation
 from jmetal.problem.singleobjective.unconstrained import Rastrigin
 from jmetal.util.termination_criterion import StoppingByEvaluations
 
@@ -17,6 +17,7 @@ from islands_desync.geneticAlgorithm.run_hpc.run_algorithm_params import (
 )
 from islands_desync.geneticAlgorithm.utils import datetimer, myDefCrossover
 from islands_desync.geneticAlgorithm.utils.myDefMutation import MyUniformMutation
+from islands_desync.geneticAlgorithm.utils.myDefProblems import LabsBinary
 
 
 def create_algorithm_hpc(
@@ -29,6 +30,7 @@ def create_algorithm_hpc(
 
     try:
         NUMBER_OF_VARIABLES = int(configuration["number_of_variables"])
+        NUMBER_OF_BITS = int(configuration["number_of_bits"])
         NUMBER_OF_EVALUATIONS = int(configuration["number_of_evaluations"])
         POPULATION_SIZE = int(configuration["population_size"])
         OFFSPRING_POPULATION_SIZE = int(configuration["offspring_population_size"])
@@ -44,7 +46,7 @@ def create_algorithm_hpc(
     except ValueError:
         print("Invalid configuration")
 
-    problem = Rastrigin(NUMBER_OF_VARIABLES)
+    problem = LabsBinary(NUMBER_OF_BITS)
 
     # if n==0:
     #     print ("W run_algorithm "+str(sys.argv[1])+"/"+str(sys.argv[4])+" WYSPA,  seria: "+ str(sys.argv[5])+",  interwał: "+str(sys.argv[7])+", liczba migrantów: "+str(sys.argv[6])+" - "+str(sys.argv[2])+" "+str(sys.argv[3]))
@@ -58,7 +60,7 @@ def create_algorithm_hpc(
         # przy binary solution
         # mutation=BitFlipMutation(0.01),
         # crossover=SPXCrossover(1.0),
-        mutation=MyUniformMutation(1 / (problem.number_of_variables()), 10.0),
+        mutation=BitFlipMutation(1 / (problem.number_of_variables())),
         # 0.5, 9.0),
         # 1.0 / (problem.number_of_variables), 0.2),
         # mutation=PolynomialMutation(

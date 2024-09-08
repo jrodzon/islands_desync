@@ -438,7 +438,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         osobniki = []
         for solut in range(len(self.solutions)):
             lista = []
-            for vari in range(self.solutions[solut].number_of_variables):
+            for vari in range(len(self.solutions[solut].variables)):
                 lista.append(self.solutions[solut].variables[vari])
             osobniki.append(lista)
         self.tab_detailed_population[self.step_num] = osobniki
@@ -449,7 +449,7 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         for i in range(len(self.solutions)):
             solution = self.solutions[i].variables
             solutionWhole = ""
-            for i in range(self.solutions[0].number_of_variables):
+            for i in range(len(self.solutions[0].variables)):
                 solutionWhole += " " + str(solution[i])
             setPopul.add(solutionWhole)
         lsp = len(setPopul)
@@ -459,7 +459,9 @@ class GeneticIslandAlgorithm(GeneticAlgorithm):
         for i in range(self.solutions.__len__()):  # population_size
             listaaa.append(self.solutions[i].variables)
 
+        # print(listaaa)
         listalTransposed = np.array(listaaa).transpose()
+        # print(listalTransposed)
         a, b = distance.Distance.minISrOdchStd(listalTransposed)
 
         self.tab_diversity[self.step_num] = {"y": lsp, "y2": a, "y3": b}

@@ -90,9 +90,9 @@ class Distance:
                     for gen in range(
                         ile_genow
                     ):  # todo: inny sposób obliczenia distance
-                        kwadratRoznicy = pow(
-                            popul[osob1].variables[gen] - popul[osob2].variables[gen], 2
-                        )
+                        osob1_gen = popul[osob1].variables[gen]
+                        osob2_gen = popul[osob2].variables[gen]
+                        kwadratRoznicy = self.calculate_gen_distance(osob1_gen, osob2_gen)
                         odleglosc += kwadratRoznicy
                         sumaOdleglosciOdPozostalych += kwadratRoznicy
                 linia += str(format(odleglosc, ".2f")) + " "
@@ -161,6 +161,12 @@ class Distance:
         #print("DZ ",do_zwrotu)
         return do_zwrotu"""
 
+    def calculate_gen_distance(self, osob1_gen, osob2_gen):
+        if isinstance(osob1_gen, list) and isinstance(osob2_gen, list):
+            return sum([0 if x == y else 1 for x, y in (osob1_gen, osob2_gen)])
+        else:
+            return pow(osob1_gen - osob2_gen, 2)
+
     def odchStd(lista):
         ileElementow = len(lista)
         suma = sum(lista)
@@ -173,7 +179,7 @@ class Distance:
     def minISrOdchStd(listaList):
         odchylenia = []
         for i in range(len(listaList)):
-            aa = Distance.odchStd(listaList[i])
+            aa = Distance.odchStd(listaList[i][0])
             odchylenia.append(aa)
         return min(odchylenia), sum(odchylenia) / len(odchylenia)
 

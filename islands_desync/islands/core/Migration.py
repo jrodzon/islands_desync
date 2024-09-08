@@ -27,7 +27,10 @@ class Migration(ABC):
         self.end = time.time()
 
     def run_time(self):
-        return self.end - self.start
+        if self.start is None:
+            return 1.0
+        else:
+            return self.end - self.start
 
     def wait_for_all_start(self):
         pass

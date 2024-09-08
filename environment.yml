@@ -1,0 +1,12 @@
+name: islands_desync
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10.14
+  - scikit-learn=1.5.1
+  - ray-all=2.35.0
+  - pandas=2.1.4
+  - matplotlib=3.9.2
+  - numpy=1.26.4
+prefix: /home/agent/.conda/envs/islands_desync

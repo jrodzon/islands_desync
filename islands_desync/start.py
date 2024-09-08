@@ -15,8 +15,8 @@ from islands_desync.islands.topologies.TorusTopology import TorusTopology
 
 def main():
     if sys.argv[2] != " ":
-        ray.init(_temp_dir=sys.argv[2])
-
+        ray.init(_temp_dir=sys.argv[2], num_cpus=4)
+    
     params = RunAlgorithmParams(
         island_count=int(sys.argv[1]),
         number_of_emigrants=int(sys.argv[3]),
@@ -25,8 +25,18 @@ def main():
         tta=sys.argv[6],
         series_number=1,
     )
+    # ray.init(_temp_dir='/tmp/ray')
 
-    computation_refs = IslandRunner(TorusTopology, RandomSelect, params).create()
+    # params = RunAlgorithmParams(
+    #     island_count=5,
+    #     number_of_emigrants=5,
+    #     migration_interval=5,
+    #     dda=datetime.today().strftime("%Y%m%d"),
+    #     tta=datetime.now().strftime("%H%M%S"),
+    #     series_number=1,
+    # )
+
+    computation_refs = IslandRunner(RingTopology, RandomSelect, params).create()
 
     results = ray.get(computation_refs)
 

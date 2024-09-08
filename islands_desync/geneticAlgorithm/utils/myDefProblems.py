@@ -146,57 +146,58 @@ class Labs(FloatProblem):
         return "Labs"
 
 
-"""class Labs(BinaryProblem):
+class LabsBinary(BinaryProblem):
 
-    def __init__(self, number_of_bits: int = 256): #todo param: number_of_variables = sequence
-        super(Labs, self).__init__()
-        self.number_of_bits = number_of_bits
-        self.number_of_objectives = 1
-        self.number_of_variables = 1
-        self.number_of_constraints = 0
+    def __init__(self, sequence_length: int = 10):
+        super(LabsBinary, self).__init__()
+        self.number_of_bits = sequence_length
+        self.__number_of_objectives = 1
+        self.__number_of_variables = 1
+        self.__number_of_constraints = 0
         self.obj_directions = [self.MINIMIZE]
-        self.obj_labels = ['Labs']
+        self.obj_labels = ['LabsBinary']
 
-    def calculateAutocorrelation(self, sequenceRepresentation, distance): #boolean seqence, int distance
-        #print("sr: "+ str(sequenceRepresentation) + " d: " + str(distance))
-        seqlength = sequenceRepresentation.__len__()
+    def calculate_autocorrelation(self, sequence, distance):
+        #print("sr: "+ str(sequence) + " d: " + str(distance))
+        seqlength = sequence.__len__()
         #print("sssssl: "+str(seqlength))
         autocorrelation = 0
-        for i in range(seqlength - distance):
-            #print("SR "+str(sequenceRepresentation[i]))
-            if sequenceRepresentation[i]:
-                s_i = 1
-            else:
-                s_i = -1
-            if sequenceRepresentation[i + distance]:
-                s_ik = 1
-            else:
-                s_ik = -1
+        for i in range(0, seqlength - distance):
+            #print("S "+str(sequence[i]))
+            s_i = 1 if sequence[i] else -1
+            s_ik = 1 if sequence[i + distance] else -1
             autocorrelation += s_i * s_ik
         return autocorrelation
 
     def evaluate(self, solution: BinarySolution) -> BinarySolution:
         energy = 0
-        #print("sol:" + str(solution.variables[0]))
-        seqLength=solution.variables[0].__len__()
-        #print("sL: "+str(solution.variables[0].__len__()))
-        for k in range(1, seqLength):
-            autocorrelation = self.calculateAutocorrelation(solution.variables[0], k)
+        for k in range(1, self.number_of_bits):
+            autocorrelation = self.calculate_autocorrelation(solution.variables[0], k)
             energy += autocorrelation * autocorrelation
-        merit = seqLength * seqLength / (2 * energy)
-        #print("sol: "+str(solution.variables[0])+" ene: "+ str(energy)+" len: "+str(seqLength)+" merit: "+str(merit))
-        solution.objectives[0] = - merit
+        #print("sol: "+str(solution.variables[0])+" ene: "+ str(energy)+" len: "+str(self.number_of_bits))
+        solution.objectives[0] = energy
         return solution
 
     def create_solution(self) -> BinarySolution:
-        new_solution = BinarySolution(number_of_variables=1, number_of_objectives=1)
-        new_solution.variables[0] = \
-            [True if random.randint(0, 1) == 0 else False for _ in range(self.number_of_bits)]
+        new_solution = BinarySolution(
+            number_of_variables=self.number_of_variables(), number_of_objectives=self.number_of_objectives()
+        )
+
+        new_solution.variables[0] = [True if random.randint(0, 1) == 0 else False for _ in range(self.number_of_bits)]
 
         return new_solution
 
-    def get_name(self) -> str:
-        return 'Labs'"""
+    def number_of_variables(self) -> int:
+        return self.__number_of_variables
+
+    def number_of_objectives(self) -> int:
+        return self.__number_of_objectives
+
+    def number_of_constraints(self) -> int:
+        return self.__number_of_constraints
+
+    def name(self) -> str:
+        return 'LabsBinary'
 
 
 def __str__(self):

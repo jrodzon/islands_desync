@@ -13,7 +13,7 @@ from islands_desync.islands.core.Emigration import Emigration
 from islands_desync.islands.core.SignalActor import SignalActor
 
 
-@ray.remote(num_cpus=1)
+@ray.remote
 class Computation:
     def __init__(
         self,
@@ -35,7 +35,7 @@ class Computation:
     def start(self):
         print("Starting comp")
         self.algorithm.run()
-        result = self.algorithm.get_result()
+        result = self.algorithm.result()
 
         calculations = {
             "island": self.n,

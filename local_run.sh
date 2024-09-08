@@ -1,3 +1,4 @@
+islands_count=4
 number_of_migrants=5
 migration_interval=5
 dda=$(date +%y%m%d)
@@ -8,4 +9,5 @@ export RAY_DEDUP_LOGS=0
 
 export PYTHONPATH="${PYTHONPATH}:$PWD"
 
-python3 -u ./islands_desync/start.py 10 $tmpdir $number_of_migrants $migration_interval $dda $tta
+python3 -u ./islands_desync/start.py $islands_count \
+$tmpdir $number_of_migrants $migration_interval $dda $tta
