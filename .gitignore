@@ -129,3 +129,6 @@ dmypy.json
 .pyre/
 
 .idea
+
+# Files created by islands_desync project
+logs

@@ -1,7 +1,6 @@
 {
   "number_of_evaluations" : 1500,
   "number_of_variables" : 1,
-  "number_of_bits" : 10,
   "population_size":16,
   "offspring_population_size": 4,
 

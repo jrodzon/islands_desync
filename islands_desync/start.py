@@ -24,6 +24,7 @@ def main():
         dda=sys.argv[5],
         tta=sys.argv[6],
         series_number=1,
+        sequence_lenght=int(sys.argv[7])
     )
     # ray.init(_temp_dir='/tmp/ray')
 
